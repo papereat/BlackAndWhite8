@@ -3,11 +3,34 @@ using System.Collections;
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu]
-public class BuidlingTile : Tile
+public class BuidlingTile : TileBase
 {
-    void StartUp()
+    public Sprite sprite;
+    public Color cl;
+    public GameObject SpawnObject;
+    public GameObject SpawnedObject;
+    public Vector3Int LocationM;
+    public Vector3 LocationG;
+    public Tilemap TM;
+
+    public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
     {
-        sprite=null;
+        tileData.sprite = sprite;
+        tileData.color = cl;
+        tileData.gameObject=SpawnObject;
+        LocationM=position;
     }
+    public void Awake()
+    {
+        TM=FindObjectOfType<Tilemap>();
+        LocationG=TM.CellToWorld(LocationM);
+        SpawnedObject=TM.GetInstantiatedObject(LocationM);
+    }
+    public void OnDisable()
+    {
+        DestroyImmediate(SpawnedObject);
+    }
+
+
 }
 
