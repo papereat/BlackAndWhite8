@@ -6,7 +6,6 @@ public class MathAndOtherStuff : MonoBehaviour
 {
     public static Vector2 VectorFromAngle (float theta) {
         var temp=theta* Mathf.Deg2Rad;
-        Debug.Log(Mathf.Cos(temp).ToString()+","+Mathf.Sin(temp).ToString());
         return new Vector2 (Mathf.Cos(temp), Mathf.Sin(temp)); // Trig is fun
     }
 

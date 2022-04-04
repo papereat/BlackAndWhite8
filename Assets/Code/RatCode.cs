@@ -10,10 +10,24 @@ public class RatCode : MonoBehaviour
     public AIDestinationSetter Destination;
     public Transform BuildingCollection;
     public float Health;
+    public AstarPath NG;
+    public AIPath AP;
+    public bool CanMove;
+    public float Damage;
+    public List<bool> isStunned;
     //public Transform Rat;
 
     void Update()
     {
+        if(isStunned.Count!=0)
+        {
+            CanMove=false;
+        }
+        else
+        {
+            CanMove=true;
+        }
+        AP.canMove=CanMove;
         if(Destination.target==null)
         {
             SetT();
@@ -28,6 +42,8 @@ public class RatCode : MonoBehaviour
 
     public void SetT()
     {
+        NG.Scan();
+        
         Transform CLosestObject=null;
         float distance=1000000;
         foreach (Transform child in BuildingCollection)

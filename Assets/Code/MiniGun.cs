@@ -10,6 +10,7 @@ public class MiniGun : Building
     public float Angle;
     public Transform BulletSpawn;
     public Transform BulletCollection;
+    public Collider2D PlayerCollider;
     public float AttackSpeed;
     public float SprayRange;
     public ContactFilter2D CF;
@@ -25,8 +26,7 @@ public class MiniGun : Building
     {
         List<Collider2D> ColliderLists=new List<Collider2D>();
        
-        CF.layerMask=PlayerMask;
-        TakeDamage.OverlapCollider(CF,ColliderLists);
+        PlayerCollider.OverlapCollider(CF,ColliderLists);
         if(ColliderLists.Count>0)
         {
            

@@ -8,8 +8,7 @@ public class Building : MonoBehaviour
     public float Health=100;
     public Collider2D TakeDamage;
     public Tile tile;
-    public LayerMask damageFrom;
-    public LayerMask PlayerMask;
+    public ContactFilter2D CFB;
 
 
     public void Damage(float Damage)
@@ -29,10 +28,19 @@ public class Building : MonoBehaviour
     {
         Debug.Log("At UP");
 
-        if(TakeDamage.IsTouchingLayers(damageFrom))
+        List<Collider2D> ColliderLists=new List<Collider2D>();
+
+        TakeDamage.OverlapCollider(CFB,ColliderLists);
+        if(ColliderLists.Count>0)
         {
-            Debug.Log("At D");
-            Damage(5*Time.deltaTime);
+            foreach (Collider2D item in ColliderLists)
+            {
+                if(item.gameObject.GetComponent<RatCode>().CanMove)
+                {
+                    Damage(item.gameObject.GetComponent<RatCode>().Damage*Time.deltaTime);
+                }
+                
+            }
         }
 
         
