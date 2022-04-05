@@ -17,5 +17,5 @@ MonoBehaviour:
   SpawnObject: {fileID: 7560990777464768390, guid: d16d1fb80daced745a91453ca773969e, type: 3}
   SpawnedObject: {fileID: 0}
   LocationM: {x: 3, y: 1, z: 0}
-  LocationG: {x: -7, y: 4, z: 0}
+  LocationG: {x: 3, y: 1, z: 0}
   TM: {fileID: 0}

@@ -9,6 +9,7 @@ public class Building : MonoBehaviour
     public Collider2D TakeDamage;
     public Tile tile;
     public ContactFilter2D CFB;
+    
 
 
     public void Damage(float Damage)

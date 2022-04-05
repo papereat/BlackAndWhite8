@@ -131,9 +131,30 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  AttackSpeed: 1.2
-  StunTime: 0.4
-  Damage: 3
+  StunTime:
+    Values:
+    - 0.3
+    - 0.4
+    - 0.5
+    - 0.6
+    - 0.75
+    Level: 0
+  Damage:
+    Values:
+    - 1
+    - 1.33
+    - 1.67
+    - 2
+    - 2.5
+    Level: 0
+  Range:
+    Values:
+    - 5
+    - 6
+    - 7
+    - 8
+    - 8
+    Level: 0
 --- !u!58 &2342972307425593336
 CircleCollider2D:
   m_ObjectHideFlags: 0

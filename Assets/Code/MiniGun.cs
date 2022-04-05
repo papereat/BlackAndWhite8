@@ -15,10 +15,13 @@ public class MiniGun : Building
     public float SprayRange;
     public ContactFilter2D CF;
     public Vector3 test;
+    public UpgradableStat Damage;
+    public UpgradableStat FireDamagePercent;
+    public UpgradableStat Piercing;
 
 
 
-    void Start()
+    void Awake()
     {
         StartCoroutine(Shoots());
     }
@@ -46,6 +49,11 @@ public class MiniGun : Building
             {
                 GameObject bullet=Instantiate(Bullet,BulletSpawn.position,new Quaternion(0,0,0,0));
                 bullet.GetComponent<Bullet>().Angle=Angle+Random.Range(-SprayRange,SprayRange);
+                bullet.GetComponent<Bullet>().Damage=Damage.CurrentValue();
+                bullet.GetComponent<Bullet>().FireDamage=Damage.CurrentValue()*FireDamagePercent.CurrentValue();
+                bullet.GetComponent<Bullet>().MaxEnemyCount=(int)Piercing.CurrentValue();
+
+                
             }
             yield return new WaitForSeconds(AttackSpeed);
         }

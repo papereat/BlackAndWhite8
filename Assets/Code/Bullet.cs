@@ -8,8 +8,11 @@ public class Bullet : MonoBehaviour
     public float lifeTime;
     float Temp=0;
     public float Damage;
+    public float FireDamage;
     public Rigidbody2D rb;
     public float bulletSpeed;
+    public int EnemyCount;
+    public int MaxEnemyCount;
 
 
     void Update()
@@ -30,6 +33,10 @@ public class Bullet : MonoBehaviour
     {
         if(!Other.collider.isTrigger)
         {
+            if(MaxEnemyCount>=EnemyCount && Other.collider.gameObject.layer==7)
+            {
+                return;
+            }
             Destroy(this.gameObject);
         }
     }

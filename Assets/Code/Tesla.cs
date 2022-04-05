@@ -5,16 +5,21 @@ using UnityEngine;
 public class Tesla : Building
 {
     public bool CanAttack;
-    public Collider2D AttackCollider;
+    public BoxCollider2D AttackCollider;
     public ContactFilter2D CF;
-    public float AttackSpeed;
-    public float StunTime;
-    public float Damage;
+    public UpgradableStat StunTime;
+    public UpgradableStat Damage;
+    public UpgradableStat Range;
     
 
     void Start()
     {
         StartCoroutine(Shoots());
+    }
+
+    void Update()
+    {
+        AttackCollider.size=new Vector2(Range.CurrentValue(),Range.CurrentValue());
     }
 
     IEnumerator Shoots()
@@ -30,12 +35,12 @@ public class Tesla : Building
                 {
                     foreach (Collider2D item in ColliderLists)
                     {
-                        item.gameObject.GetComponent<RatCode>().Health-=Damage;
+                        item.gameObject.GetComponent<RatCode>().Health-=Damage.CurrentValue();
                         StartCoroutine(Stuns(item.gameObject.GetComponent<RatCode>()));
                     }
                 }
             }
-            yield return new WaitForSeconds(AttackSpeed);
+            yield return new WaitForSeconds(1);
         }
     }
 
@@ -53,7 +58,7 @@ public class Tesla : Building
                 RC.isStunned.Remove(true);
             }
             x+=1;
-            yield return new WaitForSeconds(StunTime);
+            yield return new WaitForSeconds(StunTime.CurrentValue());
         }
     }
 }

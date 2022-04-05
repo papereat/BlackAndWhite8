@@ -15,8 +15,14 @@ public class RatCode : MonoBehaviour
     public bool CanMove;
     public float Damage;
     public List<bool> isStunned;
+    public float FireDamage;
     //public Transform Rat;
 
+
+    void Awake()
+    {
+        StartCoroutine(fireDamage());
+    }
     void Update()
     {
         if(isStunned.Count!=0)
@@ -39,8 +45,28 @@ public class RatCode : MonoBehaviour
         //Rat.position=transform.position;
         
     }
+    IEnumerator fireDamage()
+    {
+        while(true)
+        {
+            if(FireDamage>0)
+            {
+                if(FireDamage>=10)
+                {
+                    FireDamage-=10;
+                    Health-=10;
+                }
+                else
+                {
+                    Health-=FireDamage;
+                    FireDamage=0;
+                }
 
-    public void SetT()
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
+    void SetT()
     {
         NG.Scan();
         
@@ -67,6 +93,7 @@ public class RatCode : MonoBehaviour
         {
             Bullet b=Other.collider.gameObject.GetComponent<Bullet>();
             Health-=b.Damage;
+            FireDamage+=b.FireDamage;
         }
     }
 }
