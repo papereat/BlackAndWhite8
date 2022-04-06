@@ -7,6 +7,13 @@ public class Pmov : MonoBehaviour
     
     public float speed;
     public Rigidbody2D rb;
+    public int Gold;
+    public int Iron;
+    public int CatFood;
+
+    void Awake()
+    {
+    }
     
     void Update()
     {

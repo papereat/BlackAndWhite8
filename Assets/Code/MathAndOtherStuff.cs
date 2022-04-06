@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MathAndOtherStuff : MonoBehaviour
 {
@@ -14,6 +15,18 @@ public class MathAndOtherStuff : MonoBehaviour
         float x=Start.x-End.x;
         float y=Start.y-End.y;
         return Mathf.Rad2Deg*Mathf.Atan2(y,x);
+    }
+
+    public static void DebugList(List<float> list)
+    {
+        string debugLog="";
+        int currentNum=0;
+        foreach (var item in list)
+        {
+            debugLog+=currentNum.ToString()+": "+item.ToString()+", ";
+            currentNum+=1;
+        }
+        Debug.Log(debugLog);
     }
 
 }
