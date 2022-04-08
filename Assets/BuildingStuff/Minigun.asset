@@ -16,6 +16,6 @@ MonoBehaviour:
   cl: {r: 0.745283, g: 0.36096746, b: 0.024608415, a: 1}
   SpawnObject: {fileID: 7112365430295922696, guid: 63aad776b546de144a563174c50f2afc, type: 3}
   SpawnedObject: {fileID: 0}
-  LocationM: {x: 2, y: 0, z: 0}
-  LocationG: {x: 2, y: 0, z: 0}
+  LocationM: {x: 0, y: -1, z: 0}
+  LocationG: {x: -1, y: 2, z: 0}
   TM: {fileID: 0}

@@ -19,13 +19,8 @@ public class BuidlingTile : TileBase
         tileData.color = cl;
         tileData.gameObject=SpawnObject;
         LocationM=position;
-    }
-    public void Awake()
-    {
-        TM=FindObjectOfType<Tilemap>();
-        LocationG=TM.CellToWorld(LocationM);
-        SpawnedObject=TM.GetInstantiatedObject(LocationM);
-    }
+    } 
+
     public void OnDisable()
     {
         DestroyImmediate(SpawnedObject);

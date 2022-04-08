@@ -115,6 +115,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  priority: 1
   CanAttack: 1
   AttackCollider: {fileID: 2342972307425593338}
   CF:
@@ -133,7 +134,7 @@ MonoBehaviour:
     maxNormalAngle: 0
   StunTime:
     Values:
-    - 0.3
+    - 0.1
     - 0.4
     - 0.5
     - 0.6
@@ -195,7 +196,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.12, y: 1.12}
   m_EdgeRadius: 0
 --- !u!61 &2342972307425593338
 BoxCollider2D:

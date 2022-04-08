@@ -12,8 +12,9 @@ public class Tesla : Building
     public UpgradableStat Range;
     
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
         StartCoroutine(Shoots());
     }
 

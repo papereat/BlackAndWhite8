@@ -10,7 +10,6 @@ public class RatCode : MonoBehaviour
     public AIDestinationSetter Destination;
     public Transform BuildingCollection;
     public float Health;
-    public AstarPath NG;
     public AIPath AP;
     public bool CanMove;
     public float Damage;
@@ -19,6 +18,7 @@ public class RatCode : MonoBehaviour
     public RandomizedStat Drops;
     public float debug;
     public Pmov Player;
+    public List<Transform> UnreachAble;
     
     //public Transform Rat;
 
@@ -29,7 +29,6 @@ public class RatCode : MonoBehaviour
     }
     void Update()
     {
-        debug=Drops.GetStat().x;
         if(isStunned.Count!=0)
         {
             CanMove=false;
@@ -73,16 +72,27 @@ public class RatCode : MonoBehaviour
     }
     void SetT()
     {
-        NG.Scan();
+
         
         Transform CLosestObject=null;
         float distance=1000000;
+        int priority=1000;
         foreach (Transform child in BuildingCollection)
         {
-            if(distance>Vector3.Distance(child.position,transform.position))
+            if(child.gameObject.GetComponent<Building>().priority<priority)
             {
                 distance=Vector3.Distance(child.position,transform.position);
                 CLosestObject=child;
+                priority=child.gameObject.GetComponent<Building>().priority;
+            }
+            if(child.gameObject.GetComponent<Building>().priority==priority)
+            {
+                if(distance>Vector3.Distance(child.position,transform.position))
+                {
+                    distance=Vector3.Distance(child.position,transform.position);
+                    CLosestObject=child;
+                    priority=child.gameObject.GetComponent<Building>().priority;
+                }
             }
         }
         Destination.target=CLosestObject;
@@ -104,7 +114,7 @@ public class RatCode : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D Other)
     {
-        if(Other.collider.gameObject.GetComponent<Bullet>()==true){}
+        if(Other.collider.gameObject.GetComponent<Bullet>()!=null)
         {
             Bullet b=Other.collider.gameObject.GetComponent<Bullet>();
             Health-=b.Damage;

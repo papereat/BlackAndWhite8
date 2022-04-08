@@ -21,8 +21,9 @@ public class MiniGun : Building
 
 
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         StartCoroutine(Shoots());
     }
     void Update()
