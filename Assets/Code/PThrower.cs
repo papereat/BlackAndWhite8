@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class PThrower : Building
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool CanAttack;
+    public GameObject Potion;
+    public Transform target;
+    public Collider2D AttackCollider;
+    public float Range;
 
-    // Update is called once per frame
-    void Update()
+    protected override void Awake()
     {
-        
+        base.Awake();
+        StartCoroutine(Shoots());
+    }
+    IEnumerator Shoots()
+    {
+        while (true)
+        {
+            if(CanAttack)
+            {
+                if(target==null || Vector3.Distance(target.position,transform.position)>Range)
+                {
+                    List<Collider2D> ColliderLists=new List<Collider2D>();
+                    AttackCollider.OverlapCollider(CFB,ColliderLists);
+                    target=ColliderLists[0].transform;
+                }
+
+                
+            }
+        }
     }
 }
