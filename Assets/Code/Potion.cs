@@ -12,9 +12,14 @@ public class Potion : MonoBehaviour
     void Awake()
     {
         StartingPosition=transform.position;
-        StartCoroutine(Move(.01f));
+        StartCoroutine(PreMove());
     }
 
+    IEnumerator PreMove()
+    {
+        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(Move(0.01f));
+    }
     IEnumerator Move(float Speed)
     {
         float TimeSenceStart=0;
