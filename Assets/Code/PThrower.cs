@@ -18,7 +18,7 @@ public class PThrower : Building
     }
     IEnumerator Shoots()
     {
-        while (true)
+        while(true)
         {
             if(CanAttack)
             {
@@ -27,7 +27,15 @@ public class PThrower : Building
                     target=null;
                     List<Collider2D> ColliderLists=new List<Collider2D>();
                     AttackCollider.OverlapCollider(CFB,ColliderLists);
-                    target=ColliderLists[0].transform;
+                    if(ColliderLists.Count>1)
+                    {
+                        target=ColliderLists[0].transform;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
                 }
                 if(target==null)
                 {
@@ -40,7 +48,7 @@ public class PThrower : Building
                     bullet.GetComponent<Potion>().target=target;
                 }
             }
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(15);
         }
     }
 }
