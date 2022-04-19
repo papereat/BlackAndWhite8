@@ -7,17 +7,16 @@ public class Potion : MonoBehaviour
     public float TimeToReach;
     Vector3 StartingPosition;
     public Transform target;
-    public Collider2D PotionCollider;
     public GameObject PotionSpill;
     public float SplashSize;
     public float SplashLifeTime;
     public float DPSIncreaseRate;
+    public Vector3 LastLocation;
     
     void Awake()
     {
         StartingPosition=transform.position;
         StartCoroutine(PreMove());
-        PotionCollider.enabled=false;
 
     }
     IEnumerator PreMove()
@@ -31,18 +30,22 @@ public class Potion : MonoBehaviour
         while (TimeSenceStart<=TimeToReach)
         {
             TimeSenceStart+=Speed;
-            transform.position=StartingPosition+(target.position-StartingPosition)*(TimeSenceStart/TimeToReach);
+            if(target!=null)
+            {
+                LastLocation=target.position;
+                transform.position=StartingPosition+(target.position-StartingPosition)*(TimeSenceStart/TimeToReach);
+            }
+            else
+            {
+                transform.position=StartingPosition+(LastLocation-StartingPosition)*(TimeSenceStart/TimeToReach);
+            }
+            
             yield return new WaitForSeconds(Speed);
         }
-        PotionCollider.enabled=true;
-    }
-    void OnCollisionEnter2D(Collision2D Other)
-    {
-        if(!Other.collider.isTrigger)
-        {
-            GameObject Spill=Instantiate(PotionSpill,transform.position,new Quaternion(0,0,0,0));
-            Destroy(this.gameObject);
-            
-        }
+        GameObject Spill=Instantiate(PotionSpill,transform.position,new Quaternion(0,0,0,0));
+        Spill.GetComponent<PotionSpill>().SplashSize=SplashSize;
+        Spill.GetComponent<PotionSpill>().SplashLifeTime=SplashLifeTime;
+        Spill.GetComponent<PotionSpill>().DPSIncreaseRate=DPSIncreaseRate;
+        Destroy(this.gameObject);
     }
 }

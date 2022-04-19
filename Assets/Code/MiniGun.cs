@@ -34,7 +34,7 @@ public class MiniGun : Building
         if(ColliderLists.Count>0)
         {
            
-           Angle = MathAndOtherStuff.AngleFrom2Point(transform.position,ColliderLists[0].transform.position);
+           Angle = MathAndOtherStuff.AngleFrom2Point(transform.position,ColliderLists[0].transform.position)-90;
         }
         transform.eulerAngles=new Vector3(0,0,Angle);
 
@@ -49,7 +49,7 @@ public class MiniGun : Building
             if(CanAttack)
             {
                 GameObject bullet=Instantiate(Bullet,BulletSpawn.position,new Quaternion(0,0,0,0));
-                bullet.GetComponent<Bullet>().Angle=Angle+Random.Range(-SprayRange,SprayRange);
+                bullet.GetComponent<Bullet>().Angle=Angle+Random.Range(-SprayRange,SprayRange)+90;
                 bullet.GetComponent<Bullet>().Damage=Damage.CurrentValue();
                 bullet.GetComponent<Bullet>().FireDamage=Damage.CurrentValue()*FireDamagePercent.CurrentValue();
                 bullet.GetComponent<Bullet>().MaxEnemyCount=(int)Piercing.CurrentValue();

@@ -14,25 +14,29 @@ public class PotionSpill : MonoBehaviour
 
     void Awake()
     {
-        transform.localScale=new Vector3(SplashSize,SplashSize,0);
-        StartCoroutine(SpillEffect(.1f));
+        
+        StartCoroutine(SpillEffect(.01f));
     }
 
     IEnumerator SpillEffect(float Speed)
     {
+
         float increaseAmount=1;
         while (true)
         {
+            Debug.Log(SplashSize);
+            transform.localScale=new Vector3(SplashSize,SplashSize,1);
             List<Collider2D> ColliderLists=new List<Collider2D>();
             AttackCollider.OverlapCollider(CF,ColliderLists);
             foreach (var item in ColliderLists)
             {
-                item.gameObject.GetComponent<RatCode>().Health-=StartingDamage*increaseAmount*Speed;
+                item.gameObject.GetComponent<RatCode>().Health-=StartingDamage*increaseAmount*increaseAmount*Speed;
             }
-            increaseAmount=increaseAmount*(increaseAmount+DPSIncreaseRate*Speed);
+            increaseAmount=increaseAmount+DPSIncreaseRate*Speed;
             LifeTime+=Speed;
             Debug.Log(increaseAmount);
-            if(LifeTime>=SplashLifeTime)
+            Debug.Log(LifeTime<=SplashLifeTime);
+            if(LifeTime>SplashLifeTime && SplashLifeTime!=0)
             {
                 Destroy(this.gameObject);
             }

@@ -112,6 +112,17 @@ public class RatCode : MonoBehaviour
         }
         Destroy(this.gameObject);
     }
+    public static bool inRatList(List<RatCode> ToCheck,RatCode Check)
+    {
+        foreach (RatCode item in ToCheck)
+        {
+            if(item==Check)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     void OnCollisionEnter2D(Collision2D Other)
     {
         if(Other.collider.gameObject.GetComponent<Bullet>()!=null)

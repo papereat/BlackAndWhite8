@@ -13,6 +13,9 @@ public class Bullet : MonoBehaviour
     public float bulletSpeed;
     public int EnemyCount;
     public int MaxEnemyCount;
+    public Collider2D AttackCollider;
+    public ContactFilter2D CF;
+    public List<RatCode> AttackedRats;
 
 
     void Update()
@@ -25,19 +28,27 @@ public class Bullet : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        rb.velocity=MathAndOtherStuff.VectorFromAngle(Angle)*bulletSpeed;
-    }
-
-    void OnCollisionEnter2D(Collision2D Other)
-    {
-        if(!Other.collider.isTrigger)
+        List<Collider2D> ColliderLists=new List<Collider2D>();
+        AttackCollider.OverlapCollider(CF,ColliderLists);
+        foreach (var item in ColliderLists)
         {
-            if(MaxEnemyCount>=EnemyCount && Other.collider.gameObject.layer==7)
+            if(!item.isTrigger)
             {
-                return;
+                if( item.gameObject.layer==7 && !RatCode.inRatList(AttackedRats,item.gameObject.GetComponent<RatCode>()))
+                {
+                    AttackedRats.Add(item.gameObject.GetComponent<RatCode>());
+                    item.gameObject.GetComponent<RatCode>().Health-=Damage;
+                    item.gameObject.GetComponent<RatCode>().FireDamage+=FireDamage;
+                    EnemyCount+=1;
+                    if(MaxEnemyCount>=EnemyCount && item.gameObject.layer==7)
+                    {
+                        return;
+                    }
+                }
+                
+                Destroy(gameObject);
             }
-            Destroy(this.gameObject);
         }
+        rb.velocity=MathAndOtherStuff.VectorFromAngle(Angle)*bulletSpeed;
     }
 }

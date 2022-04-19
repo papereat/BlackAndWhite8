@@ -28,5 +28,6 @@ public class MathAndOtherStuff : MonoBehaviour
         }
         Debug.Log(debugLog);
     }
+    
 
 }

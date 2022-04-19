@@ -12,6 +12,7 @@ public class BuidlingTile : TileBase
     public Vector3Int LocationM;
     public Vector3 LocationG;
     public Tilemap TM;
+    public int Cost;
 
     public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
     {

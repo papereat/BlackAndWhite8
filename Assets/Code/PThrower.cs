@@ -13,6 +13,7 @@ public class PThrower : Building
     public UpgradableStat SplashSize;
     public UpgradableStat DPSIncreaseRate;
     public UpgradableStat SplashLifeTime;
+    public List<Collider2D> ColliderLists;
 
     protected override void Awake()
     {
@@ -28,21 +29,16 @@ public class PThrower : Building
                 if(target==null || Vector3.Distance(target.position,transform.position)>Range)
                 {
                     target=null;
-                    List<Collider2D> ColliderLists=new List<Collider2D>();
                     AttackCollider.OverlapCollider(CFB,ColliderLists);
-                    if(ColliderLists.Count>1)
+                    if(ColliderLists.Count>=1)
                     {
                         target=ColliderLists[0].transform;
-                    }
-                    else
-                    {
-                        continue;
                     }
 
                 }
                 if(target==null)
                 {
-                    continue;    
+                    yield return new WaitForSeconds(5);    
                 }
                 else
                 {
@@ -53,8 +49,10 @@ public class PThrower : Building
                     bullet.GetComponent<Potion>().SplashLifeTime=SplashLifeTime.CurrentValue();
                     bullet.GetComponent<Potion>().target=target;
                 }
+
+                
             }
-            yield return new WaitForSeconds(15);
+            yield return new WaitForSeconds(5);
         }
     }
 }
