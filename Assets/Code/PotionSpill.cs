@@ -8,11 +8,13 @@ public class PotionSpill : MonoBehaviour
     public Collider2D AttackCollider;
     public float StartingDamage;
     public float DPSIncreaseRate;
-    public float lifeTime=0;
-    public float MaxLifetime;
+    public float LifeTime;
+    public float SplashSize;
+    public float SplashLifeTime;
 
     void Awake()
     {
+        transform.localScale=new Vector3(SplashSize,SplashSize,0);
         StartCoroutine(SpillEffect(.1f));
     }
 
@@ -28,9 +30,9 @@ public class PotionSpill : MonoBehaviour
                 item.gameObject.GetComponent<RatCode>().Health-=StartingDamage*increaseAmount*Speed;
             }
             increaseAmount=increaseAmount*(increaseAmount+DPSIncreaseRate*Speed);
-            lifeTime+=Speed;
+            LifeTime+=Speed;
             Debug.Log(increaseAmount);
-            if(lifeTime>=MaxLifetime)
+            if(LifeTime>=SplashLifeTime)
             {
                 Destroy(this.gameObject);
             }

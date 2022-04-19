@@ -9,7 +9,9 @@ public class Potion : MonoBehaviour
     public Transform target;
     public Collider2D PotionCollider;
     public GameObject PotionSpill;
-
+    public float SplashSize;
+    public float SplashLifeTime;
+    public float DPSIncreaseRate;
     
     void Awake()
     {

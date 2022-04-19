@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4917758332793608421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.26, y: -1.78, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -129,5 +129,6 @@ MonoBehaviour:
   AttackCollider: {fileID: 1664483149920711840}
   StartingDamage: 1
   DPSIncreaseRate: 0.000001
-  lifeTime: 0
-  MaxLifetime: 1
+  LifeTime: 0
+  SplashSize: 0
+  SplashLifeTime: 0

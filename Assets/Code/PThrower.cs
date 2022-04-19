@@ -10,6 +10,9 @@ public class PThrower : Building
     public Collider2D AttackCollider;
     public float Range;
     public float TimeToReach;
+    public UpgradableStat SplashSize;
+    public UpgradableStat DPSIncreaseRate;
+    public UpgradableStat SplashLifeTime;
 
     protected override void Awake()
     {
@@ -45,6 +48,9 @@ public class PThrower : Building
                 {
                     GameObject bullet=Instantiate(Potion,transform.position,new Quaternion(0,0,0,0));
                     bullet.GetComponent<Potion>().TimeToReach=TimeToReach;
+                    bullet.GetComponent<Potion>().SplashSize=SplashSize.CurrentValue();
+                    bullet.GetComponent<Potion>().DPSIncreaseRate=DPSIncreaseRate.CurrentValue();
+                    bullet.GetComponent<Potion>().SplashLifeTime=SplashLifeTime.CurrentValue();
                     bullet.GetComponent<Potion>().target=target;
                 }
             }
