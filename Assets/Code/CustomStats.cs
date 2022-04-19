@@ -18,6 +18,7 @@ public class UpgradableStat
         Level+=1;
     }
 }
+
 [Serializable]
 public class RandomizedStat
 {

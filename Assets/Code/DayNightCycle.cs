@@ -8,6 +8,7 @@ public class DayNightCycle : MonoBehaviour
     public float Time;
     public bool isPaused;
     public bool isDay;
+    public int Day;
 
 
     void Start()
@@ -26,6 +27,7 @@ public class DayNightCycle : MonoBehaviour
             if(Time>24)
             {
                 Time=Time-24;
+                Day+=1;
             }
             isDay=Time<=12;
             yield return new WaitForSeconds(RunsEvry);
