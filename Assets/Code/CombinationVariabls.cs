@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [Serializable]
-public class BoolAndVector3
+public class BoolAndVector2
 {
     public bool Bool;
-    public Vector3 Vector;
+    public Vector2 Vector;
 
-    public BoolAndVector3(bool Bool,Vector3 Vector)
+    public BoolAndVector2(bool Bool,Vector3 Vector)
     {
         this.Bool=Bool;
-        this.Vector3=Vector3;
+        this.Vector=Vector;
     }
 }

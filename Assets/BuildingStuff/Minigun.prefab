@@ -147,7 +147,8 @@ MonoBehaviour:
     - 4
     - 5
     - 6
-    Level: 0
+    - 100
+    Level: 4
   FireDamagePercent:
     Values:
     - 0
