@@ -197,7 +197,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &3779499969477315904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   repathRateCompatibility: NaN
   canSearchCompability: 0
   orientation: 1
-  enableRotation: 1
+  enableRotation: 0
   autoRepath:
     mode: 2
     interval: 0.5
@@ -255,7 +255,6 @@ MonoBehaviour:
   Destination: {fileID: 6500106911284492858}
   BuildingCollection: {fileID: 0}
   Health: 100
-  NG: {fileID: 0}
   AP: {fileID: 3779499969477315904}
   CanMove: 1
   Damage: 10
@@ -287,3 +286,5 @@ MonoBehaviour:
       Percent: 0.01
   debug: 0
   Player: {fileID: 0}
+  UnreachAble: []
+  HealthBar: {fileID: 6531552719106984101, guid: d07dc409e2b410145b5f954f376bad63, type: 3}

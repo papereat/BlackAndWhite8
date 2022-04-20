@@ -13,6 +13,7 @@ public class Building : MonoBehaviour
     public int priority;
     public AstarPath AP;
     WorldStatHolder WSH;
+    public GameObject HealthBar;
 
 
     public void Damage(float Damage)
@@ -52,8 +53,15 @@ public class Building : MonoBehaviour
         WSH=FindObjectOfType<WorldStatHolder>();
         AP=WSH.AP;
     }
+    protected virtual void Start()
+    {
+        HealthBar=Instantiate(HealthBar,new Vector3(transform.position.x,transform.position.y-0.25f,transform.position.z),new Quaternion(0,0,0,0));
+        HealthBar.GetComponent<HealthBar>().IsBuidling=true;
+        HealthBar.GetComponent<HealthBar>().Build=this.gameObject.GetComponent<Building>();
+    }
     void Death()
     {
+        Destroy(HealthBar);
         Collider2D[] CollidersToOff=GetComponents<Collider2D>();
         foreach (var item in CollidersToOff)
         {

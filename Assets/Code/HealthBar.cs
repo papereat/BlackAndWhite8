@@ -14,22 +14,26 @@ public class HealthBar : MonoBehaviour
     public float MaxHealth;
     public bool Hide;
     public bool ShowWithFullHP;
+    public Transform mask;
+    int co=0;
     // Start is called before the first frame update
-    void Awake()
-    {
-        if(IsBuidling)
-        {
-            MaxHealth=Build.Health;
-        }
-        else
-        {
-            MaxHealth=Rat.Health;
-        }
-    }
+
 
     // Update is called once per frame
     void Update()
     {
+        if(co==0)
+        {
+            if(IsBuidling)
+            {
+                MaxHealth=Build.Health;
+            }
+            else
+            {
+                MaxHealth=Rat.Health;
+            }
+        }
+        co=1;
         if(IsBuidling)
         {
             Health=Build.Health;
@@ -38,7 +42,7 @@ public class HealthBar : MonoBehaviour
         {
             Health=Rat.Health;
         }
-        if(Hide || MaxHealth-1>=Health && !ShowWithFullHP)
+        if(Hide || MaxHealth==Health && !ShowWithFullHP)
         {
             foreach(SpriteRenderer item in SRs)
             {
@@ -52,6 +56,7 @@ public class HealthBar : MonoBehaviour
                item.enabled=true;
            } 
            SRs[0].color=gradient.Evaluate(Health/MaxHealth);
+           mask.localScale=new Vector3(Health/MaxHealth,1,1);
         }
     }
 }

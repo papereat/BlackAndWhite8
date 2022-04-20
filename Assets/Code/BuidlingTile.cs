@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Tilemaps;
@@ -26,7 +27,6 @@ public class BuidlingTile : TileBase
     {
         DestroyImmediate(SpawnedObject);
     }
-
 
 }
 

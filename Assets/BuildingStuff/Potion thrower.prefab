@@ -117,6 +117,7 @@ MonoBehaviour:
     maxNormalAngle: 0
   priority: 1
   AP: {fileID: 0}
+  HealthBar: {fileID: 6531552719106984101, guid: d07dc409e2b410145b5f954f376bad63, type: 3}
   CanAttack: 1
   Potion: {fileID: 2821232945708181236, guid: 8b02dba8fe1d29e49af9ca8842d096e9, type: 3}
   target: {fileID: 0}

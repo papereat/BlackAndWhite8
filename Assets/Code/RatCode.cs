@@ -19,6 +19,7 @@ public class RatCode : MonoBehaviour
     public float debug;
     public Pmov Player;
     public List<Transform> UnreachAble;
+    public GameObject HealthBar;
     
     //public Transform Rat;
 
@@ -26,6 +27,12 @@ public class RatCode : MonoBehaviour
     void Awake()
     {
         StartCoroutine(fireDamage());
+    }
+    void Start()
+    {
+        HealthBar=Instantiate(HealthBar,new Vector3(transform.position.x,transform.position.y-0.25f,transform.position.z),new Quaternion(0,0,0,0),transform);
+        HealthBar.GetComponent<HealthBar>().IsBuidling=false;
+        HealthBar.GetComponent<HealthBar>().Rat=this.gameObject.GetComponent<RatCode>();
     }
     void Update()
     {
