@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+public static class Extensions
+{
+    public static int findIndex<T>(this T[] array, T item) {
+        return Array.IndexOf(array, item);
+    }
+}
 public class MathAndOtherStuff : MonoBehaviour
 {
     public static Vector2 VectorFromAngle (float theta) {

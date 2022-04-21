@@ -75,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.9150943, g: 0.42646843, b: 0.67457265, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 50903d439f914184599ebde36a95cf54, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c08446b683e9840ad04a8336f1d137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  Health: 30
   TakeDamage: {fileID: 6052230847388389544}
   tile: {fileID: 0}
   CFB:
@@ -118,6 +118,7 @@ MonoBehaviour:
   priority: 1
   AP: {fileID: 0}
   HealthBar: {fileID: 6531552719106984101, guid: d07dc409e2b410145b5f954f376bad63, type: 3}
+  UpgradeCount: 0
   CanAttack: 1
   Potion: {fileID: 2821232945708181236, guid: 8b02dba8fe1d29e49af9ca8842d096e9, type: 3}
   target: {fileID: 0}
@@ -131,14 +132,14 @@ MonoBehaviour:
     - 1.5
     - 1.8
     - 2
-    Level: 0
+    Level: 2
   DPSIncreaseRate:
     Values:
     - 2
     Level: 0
   SplashLifeTime:
     Values:
-    - 1
+    - 3
     Level: 0
   ColliderLists: []
 --- !u!58 &6052230847388389543

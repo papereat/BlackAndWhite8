@@ -14,6 +14,7 @@ public class Building : MonoBehaviour
     public AstarPath AP;
     WorldStatHolder WSH;
     public GameObject HealthBar;
+    public int UpgradeCount;
 
 
     public void Damage(float Damage)
@@ -59,7 +60,7 @@ public class Building : MonoBehaviour
         HealthBar.GetComponent<HealthBar>().IsBuidling=true;
         HealthBar.GetComponent<HealthBar>().Build=this.gameObject.GetComponent<Building>();
     }
-    void Death()
+    protected virtual void Death()
     {
         Destroy(HealthBar);
         Collider2D[] CollidersToOff=GetComponents<Collider2D>();

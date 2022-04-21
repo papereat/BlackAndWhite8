@@ -75,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.2929156, g: 0.759976, b: 0.8301887, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b0d6cc1b529109e41a0d9d4510d75c07, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87c18f2d6273864ea0cb0241299e87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  Health: 50
   TakeDamage: {fileID: 2342972307425593339}
   tile: {fileID: 0}
   CFB:
@@ -118,6 +118,7 @@ MonoBehaviour:
   priority: 1
   AP: {fileID: 0}
   HealthBar: {fileID: 6531552719106984101, guid: d07dc409e2b410145b5f954f376bad63, type: 3}
+  UpgradeCount: 0
   CanAttack: 1
   AttackCollider: {fileID: 2342972307425593338}
   CF:
@@ -141,7 +142,7 @@ MonoBehaviour:
     - 0.5
     - 0.6
     - 0.75
-    Level: 0
+    Level: 3
   Damage:
     Values:
     - 1
@@ -157,7 +158,7 @@ MonoBehaviour:
     - 7
     - 8
     - 8
-    Level: 0
+    Level: 2
 --- !u!58 &2342972307425593336
 CircleCollider2D:
   m_ObjectHideFlags: 0

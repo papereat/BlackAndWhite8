@@ -39,6 +39,14 @@ public class RatSpawner : MonoBehaviour
                     SpawnRat(test.Vector);
                 }
             }
+            if(!DNC.isDay)
+            {
+                BoolAndVector2 test=RatSpawnLocation(10);
+                if(test.Bool)
+                {
+                    SpawnRat(test.Vector);
+                }
+            }
             yield return new WaitForSeconds(0.1f);
         }
     }

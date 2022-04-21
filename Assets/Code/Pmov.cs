@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Pmov : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Pmov : MonoBehaviour
     public Rigidbody2D rb;
     public int Gold;
     public int Iron;
+    public TextMeshProUGUI IronCount;
     public int CatFood;
 
     void Awake()
@@ -17,6 +19,7 @@ public class Pmov : MonoBehaviour
     
     void Update()
     {
+        IronCount.text="Iron: "+Iron.ToString();
         Vector2 movemnt=new Vector2(0,0);
         if(Input.GetKey(KeyCode.W))
         {
