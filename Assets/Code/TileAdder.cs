@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 
 public class TileAdder : MonoBehaviour
 {
     public Tilemap TM;
     public BuidlingTile[] BuildableTiles;
+    public GameObject[] BuildingButtons;
+    public Text[] BuildingPriceText;
     public int[] AmountMade;
     public Pmov Player;
     public int SelectedTile;
+    public bool inBuildMode;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +23,7 @@ public class TileAdder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(SelectedTile!=-1)
+        if(inBuildMode)
         {
             if(Input.GetKeyDown(KeyCode.Mouse1))
             {
@@ -38,6 +42,19 @@ public class TileAdder : MonoBehaviour
     {
         
     }
+    public void ChangeSet(int i)
+    {
+        SelectedTile=i;
+    }
+    public void toggleButtons()
+    {
+        foreach (var item in BuildingButtons)
+        {
+            item.SetActive(!item.activeSelf);
+            inBuildMode=item.activeSelf;
+        }
+    }
+    
     void PlaceTile()
     {
         Vector3Int tilemapPos = TM.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)); 

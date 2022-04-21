@@ -209,7 +209,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 5
     m_NumAlphaKeys: 2
-  AlwaysShow: 1
+  AlwaysShow: 0
   SRs:
   - {fileID: 7174386114663705}
   - {fileID: 858570091184058314}
@@ -218,7 +218,7 @@ MonoBehaviour:
   Health: 100
   MaxHealth: 100
   Hide: 0
-  ShowWithFullHP: 1
+  ShowWithFullHP: 0
   mask: {fileID: 1369086160005528539}
 --- !u!1 &7258285970948918592
 GameObject:
