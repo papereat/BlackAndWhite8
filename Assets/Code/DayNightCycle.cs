@@ -31,6 +31,7 @@ public class DayNightCycle : MonoBehaviour
             {
                 Time=Time-24;
                 Day+=1;
+                
             }
             isDay=Time<=12;
             yield return new WaitForSeconds(RunsEvry);

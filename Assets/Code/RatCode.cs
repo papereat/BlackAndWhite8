@@ -15,7 +15,7 @@ public class RatCode : MonoBehaviour
     public float Damage;
     public List<bool> isStunned;
     public float FireDamage;
-    public RandomizedStat Drops;
+    public ValueAndPercentAndPercentList Drops;
     public float debug;
     public Pmov Player;
     public List<Transform> UnreachAble;
@@ -138,7 +138,7 @@ public class RatCode : MonoBehaviour
 
     void Death()
     {
-        Vector2 Loot=Drops.GetStat();
+        Vector2 Loot=new Vector2(Random.Range(0,11),0);
         switch (Loot.y)
         {
             case 0:

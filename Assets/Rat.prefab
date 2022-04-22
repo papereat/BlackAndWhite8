@@ -261,30 +261,32 @@ MonoBehaviour:
   isStunned: 
   FireDamage: 0
   Drops:
-    Range: {x: 0, y: 10}
-    AllRaritysAreEqual: 0
-    PossibleValuesAndPercent:
-    - list:
-      - Value: 1
-        Percent: 0.3
-      - Value: 2
-        Percent: 0.3
-      - Value: 3
-        Percent: 0.3
-      - Value: 6
-        Percent: 0.05
-      - Value: 0
-        Percent: 0
-      Percent: 0.99
-    - list:
-      - Value: 1
-        Percent: 0.5
-      - Value: 2
-        Percent: 0.45
-      - Value: 3
-        Percent: 0.5
-      Percent: 0.01
+    list:
+    - Value: 1
+      Percent: 0.2
+    - Value: 2
+      Percent: 0
+    - Value: 3
+      Percent: 0
+    - Value: 4
+      Percent: 0
+    - Value: 5
+      Percent: 0
+    - Value: 6
+      Percent: 0
+    - Value: 7
+      Percent: 0
+    - Value: 8
+      Percent: 0
+    - Value: 9
+      Percent: 0
+    - Value: 10
+      Percent: 0.03
+    Percent: 0
   debug: 0
   Player: {fileID: 0}
   UnreachAble: []
   HealthBar: {fileID: 6531552719106984101, guid: d07dc409e2b410145b5f954f376bad63, type: 3}
+  DNC: {fileID: 0}
+  DamageAtNight: 0
+  goodPriority: 0

@@ -21,7 +21,7 @@ public class RatSpawner : MonoBehaviour
     public Pmov Player;
     public List<bool> isFar;
     public float Difficulty;
-    public int SetupTime;
+    public float DifficultyGrowthRate;
     public int StarRatSpawns;
     public Transform RatCollection;
 
@@ -34,22 +34,40 @@ public class RatSpawner : MonoBehaviour
 
     IEnumerator RatSpawnCycle()
     {
+        int RatsSpawned=0;
+        int LastDay=0;
+        int RatsToSpawn=0;
+
         while(true)
         {
-            if(ForceSpawnRats)
+            if(LastDay!=DNC.Day)
             {
-                BoolAndVector2 test=RatSpawnLocation(10);
-                if(test.Bool)
+                if(((int)Mathf.Pow(DNC.Day,2))/(20*(2/Difficulty))+RatsToSpawn>=(((int)Mathf.Pow(DNC.Day,2))/(20*(2/Difficulty*DNC.Day*DifficultyGrowthRate))+RatsToSpawn))
                 {
-                    SpawnRat(test.Vector);
+                    RatsToSpawn=(int)(((int)Mathf.Pow(DNC.Day,2))/(20*(2/Difficulty))+RatsToSpawn);
+                }
+                else
+                {
+                    RatsToSpawn=(int)(((int)Mathf.Pow(DNC.Day,2))/(20*(2/Difficulty*DNC.Day*DifficultyGrowthRate))+RatsToSpawn);
                 }
             }
-            if(!DNC.isDay)
+            if(RatsToSpawn>0)
             {
-                BoolAndVector2 test=RatSpawnLocation(10);
-                if(test.Bool)
+                if(ForceSpawnRats)
                 {
-                    SpawnRat(test.Vector);
+                    BoolAndVector2 test=RatSpawnLocation(10);
+                    if(test.Bool)
+                    {
+                        SpawnRat(test.Vector);
+                    }
+                }
+                if(!DNC.isDay)
+                {
+                    BoolAndVector2 test=RatSpawnLocation(10);
+                    if(test.Bool)
+                    {
+                        SpawnRat(test.Vector);
+                    }
                 }
             }
             yield return new WaitForSeconds(0.1f);
