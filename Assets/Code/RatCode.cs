@@ -20,6 +20,9 @@ public class RatCode : MonoBehaviour
     public Pmov Player;
     public List<Transform> UnreachAble;
     public GameObject HealthBar;
+    public DayNightCycle DNC;
+    public bool DamageAtNight;
+    public int goodPriority;
     
     //public Transform Rat;
 
@@ -86,7 +89,35 @@ public class RatCode : MonoBehaviour
         int priority=1000;
         foreach (Transform child in BuildingCollection)
         {
-            if(child.gameObject.GetComponent<Building>().priority<priority)
+            if(priority==goodPriority)
+            {
+                if(child.gameObject.GetComponent<Building>().priority==goodPriority)
+                {
+                    if(distance>Vector3.Distance(child.position,transform.position))
+                    {
+                        distance=Vector3.Distance(child.position,transform.position);
+                        CLosestObject=child;
+                        priority=child.gameObject.GetComponent<Building>().priority;
+                    }
+                }
+            }
+            else
+            {
+                if(child.gameObject.GetComponent<Building>().priority==goodPriority)
+                {
+                    distance=Vector3.Distance(child.position,transform.position);
+                    CLosestObject=child;
+                    priority=child.gameObject.GetComponent<Building>().priority; 
+                }
+                else if(distance>Vector3.Distance(child.position,transform.position))
+                {
+                    distance=Vector3.Distance(child.position,transform.position);
+                    CLosestObject=child;
+                    priority=child.gameObject.GetComponent<Building>().priority;
+                }
+            }
+            /*
+            if(priority!=goodPriority || child.gameObject.GetComponent<Building>().priority<priority)
             {
                 distance=Vector3.Distance(child.position,transform.position);
                 CLosestObject=child;
@@ -100,7 +131,7 @@ public class RatCode : MonoBehaviour
                     CLosestObject=child;
                     priority=child.gameObject.GetComponent<Building>().priority;
                 }
-            }
+            }*/
         }
         Destination.target=CLosestObject;
     }

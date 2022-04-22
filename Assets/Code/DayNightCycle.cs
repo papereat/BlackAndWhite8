@@ -15,7 +15,10 @@ public class DayNightCycle : MonoBehaviour
     {
       StartCoroutine(StartCycle(0.1f));
     }
-
+    public float DayPercent()
+    {
+        return Time/24;
+    }
     IEnumerator StartCycle(float RunsEvry)
     {
         while (true)

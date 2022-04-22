@@ -20,6 +20,11 @@ public class RatSpawner : MonoBehaviour
     public Transform BuildingCollider;
     public Pmov Player;
     public List<bool> isFar;
+    public float Difficulty;
+    public int SetupTime;
+    public int StarRatSpawns;
+    public Transform RatCollection;
+
     
     // Start is called before the first frame update
     void Start()
@@ -133,8 +138,10 @@ public class RatSpawner : MonoBehaviour
     }
     public void SpawnRat(Vector2 Location)
     {
-        GameObject RatInitiate=Instantiate(RatPrefab,new Vector3(Location.x,Location.y,0),new Quaternion(0,0,0,0));
+        GameObject RatInitiate=Instantiate(RatPrefab,new Vector3(Location.x,Location.y,0),new Quaternion(0,0,0,0),RatCollection);
         RatInitiate.GetComponent<RatCode>().Player=Player;
         RatInitiate.GetComponent<RatCode>().BuildingCollection=BuildingCollider;
+        RatInitiate.GetComponent<RatCode>().DNC=DNC;
+        RatInitiate.GetComponent<RatCode>().goodPriority=Random.Range(0,2);
     }
 }
