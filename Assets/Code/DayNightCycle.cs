@@ -9,6 +9,7 @@ public class DayNightCycle : MonoBehaviour
     public bool isPaused;
     public bool isDay;
     public int Day;
+    public Transform UI;
 
 
     void Start()
@@ -33,6 +34,7 @@ public class DayNightCycle : MonoBehaviour
                 Day+=1;
                 
             }
+            UI.localRotation=new Quaternion(0,0,Time,0);
             isDay=Time<=12;
             yield return new WaitForSeconds(RunsEvry);
         }
