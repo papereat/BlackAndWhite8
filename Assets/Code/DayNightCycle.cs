@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DayNightCycle : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class DayNightCycle : MonoBehaviour
     public bool isDay;
     public int Day;
     public Transform UI;
+    public Button SkipDay;
+    public Button SkipNight;
+    public RatSpawner RS;
 
 
     void Start()
@@ -19,6 +23,14 @@ public class DayNightCycle : MonoBehaviour
     public float DayPercent()
     {
         return Time/24;
+    }
+    public void SetTime(float SetTo)
+    {
+        if(SetTo<=Time)
+        {
+            Day+=1;
+        }
+        Time=SetTo%24;
     }
     IEnumerator StartCycle(float RunsEvry)
     {
@@ -38,6 +50,15 @@ public class DayNightCycle : MonoBehaviour
             rotationVector.z = -360*(Time/24)+90;
             UI.rotation = Quaternion.Euler(rotationVector);
             isDay=Time<=12;
+            SkipDay.interactable=isDay;
+            if(!isDay&&RS.RatsToSpawn<1)
+            {
+                SkipNight.interactable=true;
+            }
+            else
+            {
+                SkipNight.interactable=false;
+            }
             yield return new WaitForSeconds(RunsEvry);
         }
     }

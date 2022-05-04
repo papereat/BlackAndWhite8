@@ -124,7 +124,7 @@ MonoBehaviour:
   target: {fileID: 0}
   AttackCollider: {fileID: 6052230847388389545}
   Range: 10
-  TimeToReach: 3
+  TimeToReach: 1
   SplashSize:
     Values:
     - 0.9
@@ -142,6 +142,7 @@ MonoBehaviour:
     - 3
     Level: 0
   ColliderLists: []
+  AttackTime: 6
 --- !u!58 &6052230847388389543
 CircleCollider2D:
   m_ObjectHideFlags: 0

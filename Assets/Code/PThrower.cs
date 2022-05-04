@@ -14,6 +14,7 @@ public class PThrower : Building
     public UpgradableStat DPSIncreaseRate;
     public UpgradableStat SplashLifeTime;
     public List<Collider2D> ColliderLists;
+    public float AttackTime;
 
     protected override void Awake()
     {
@@ -38,7 +39,7 @@ public class PThrower : Building
                 }
                 if(target==null)
                 {
-                    yield return new WaitForSeconds(5);    
+                    yield return new WaitForSeconds(AttackTime);    
                 }
                 else
                 {
@@ -52,7 +53,7 @@ public class PThrower : Building
 
                 
             }
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(AttackTime);
         }
     }
 }
