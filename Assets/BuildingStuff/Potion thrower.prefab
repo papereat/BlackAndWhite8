@@ -135,7 +135,7 @@ MonoBehaviour:
     Level: 2
   DPSIncreaseRate:
     Values:
-    - 2
+    - 2.5
     Level: 0
   SplashLifeTime:
     Values:

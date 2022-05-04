@@ -34,7 +34,9 @@ public class DayNightCycle : MonoBehaviour
                 Day+=1;
                 
             }
-            UI.localRotation=new Quaternion(0,0,-Time,0);
+            var rotationVector = UI.rotation.eulerAngles;
+            rotationVector.z = -360*(Time/24)+90;
+            UI.rotation = Quaternion.Euler(rotationVector);
             isDay=Time<=12;
             yield return new WaitForSeconds(RunsEvry);
         }

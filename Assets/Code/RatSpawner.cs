@@ -22,9 +22,11 @@ public class RatSpawner : MonoBehaviour
     public List<bool> isFar;
     public float Difficulty;
     public float DifficultyGrowthRate;
-    public int StarRatSpawns;
+    public int StartingRats;
     public Transform RatCollection;
-
+    public float RatsSpawned=0;
+    public int LastDay=0;
+    public float RatsToSpawn=0;
     
     // Start is called before the first frame update
     void Start()
@@ -34,22 +36,18 @@ public class RatSpawner : MonoBehaviour
 
     IEnumerator RatSpawnCycle()
     {
-        int RatsSpawned=0;
-        int LastDay=0;
-        int RatsToSpawn=0;
-
+        
+        var startingDifficulty=Difficulty;
         while(true)
         {
             if(LastDay!=DNC.Day)
             {
-                if(((int)Mathf.Pow(DNC.Day,2))/(20*(2/Difficulty))+RatsToSpawn>=(((int)Mathf.Pow(DNC.Day,2))/(20*(2/Difficulty*DNC.Day*DifficultyGrowthRate))+RatsToSpawn))
-                {
-                    RatsToSpawn=(int)(((int)Mathf.Pow(DNC.Day,2))/(20*(2/Difficulty))+RatsToSpawn);
-                }
-                else
-                {
-                    RatsToSpawn=(int)(((int)Mathf.Pow(DNC.Day,2))/(20*(2/Difficulty*DNC.Day*DifficultyGrowthRate))+RatsToSpawn);
-                }
+                LastDay=DNC.Day;
+                Debug.Log("New Day");
+                RatsSpawned=0;
+                RatsToSpawn=Mathf.Pow(StartingRats,Difficulty/10)-Mathf.Pow(StartingRats,startingDifficulty/10)+StartingRats;
+                Difficulty+=DifficultyGrowthRate;
+
             }
             if(RatsToSpawn>0)
             {
@@ -67,6 +65,7 @@ public class RatSpawner : MonoBehaviour
                     if(test.Bool)
                     {
                         SpawnRat(test.Vector);
+                        RatsToSpawn-=1;
                     }
                 }
             }
