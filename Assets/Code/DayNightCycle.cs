@@ -34,7 +34,7 @@ public class DayNightCycle : MonoBehaviour
                 Day+=1;
                 
             }
-            UI.localRotation=new Quaternion(0,0,Time,0);
+            UI.localRotation=new Quaternion(0,0,-Time,0);
             isDay=Time<=12;
             yield return new WaitForSeconds(RunsEvry);
         }
