@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DayNightCycle : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class DayNightCycle : MonoBehaviour
     public Button SkipDay;
     public Button SkipNight;
     public RatSpawner RS;
+    public TextMeshProUGUI DayText;
 
 
     void Start()
@@ -26,11 +28,12 @@ public class DayNightCycle : MonoBehaviour
     }
     public void SetTime(float SetTo)
     {
+        
         if(SetTo<=Time)
         {
             Day+=1;
         }
-        Time=SetTo%24;
+        Time=SetTo;
     }
     IEnumerator StartCycle(float RunsEvry)
     {
@@ -51,8 +54,10 @@ public class DayNightCycle : MonoBehaviour
             UI.rotation = Quaternion.Euler(rotationVector);
             isDay=Time<=12;
             SkipDay.interactable=isDay;
-            if(!isDay&&RS.RatsToSpawn<1)
+            DayText.text="Day #"+(Day+1).ToString();
+            if(!isDay&&RS.RatsToSpawn<2&&RS.RatCollection.childCount<=1)
             {
+                Debug.Log("test");
                 SkipNight.interactable=true;
             }
             else

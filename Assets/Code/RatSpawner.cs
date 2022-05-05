@@ -28,6 +28,7 @@ public class RatSpawner : MonoBehaviour
     public int LastDay=0;
     public float RatsToSpawn=0;
     
+    
     // Start is called before the first frame update
     void Start()
     {

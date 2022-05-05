@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using TMPro;
+using System;
 
 public class TileAdder : MonoBehaviour
 {
@@ -31,16 +32,33 @@ public class TileAdder : MonoBehaviour
         if(inBuildMode)
         {
            
-            if(Input.GetKeyDown(KeyCode.Mouse1))
+            if(Input.GetKey(KeyCode.Mouse1))
             {
                 if(CanBuy[SelectedTile])
                 {
-                    Player.Iron-=BuildableTiles[SelectedTile].Cost+2*AmountMade[SelectedTile];
-                    PlaceTile();
+                    Vector3Int tilemapPos = TM.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)); 
+                    var DeleteTile=TM.GetTile(tilemapPos);
+                    if(BuildableTiles[SelectedTile]!=DeleteTile)
+                    {
+                        Player.Iron-=BuildableTiles[SelectedTile].Cost+2*AmountMade[SelectedTile];
+                        PlaceTile();
+                    }
+                    
                 }
                 else
                 {
                     NotEnough(true,Player.Iron-BuildableTiles[SelectedTile].Cost+2*AmountMade[SelectedTile]);
+                }
+            }
+            if(Input.GetKey(KeyCode.Mouse0))
+            {
+                Vector3Int tilemapPos = TM.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)); 
+                var DeleteTile=TM.GetTile(tilemapPos);
+                if(!DeleteTile!=null)
+                {
+                    int Index=Array.IndexOf(BuildableTiles,DeleteTile);
+                    Player.Iron+=BuildableTiles[Index].Cost+AmountMade[Index];
+                    TM.SetTile(tilemapPos,null);
                 }
             }
         }
@@ -51,14 +69,14 @@ public class TileAdder : MonoBehaviour
         {
             foreach (var item in BuildingButtons)
             {
-                //Debug.Log(BuildableTiles[AmountMade.findIndex(item)].name);
-                if(Player.Iron>=BuildableTiles[BuildingButtons.findIndex(item)].Cost+2*AmountMade[BuildingButtons.findIndex(item)])
+                int Index=BuildingButtons.findIndex(item);
+                if(Player.Iron>=BuildableTiles[Index].Cost+2*AmountMade[Index])
                 {
-                    CanBuy[BuildingButtons.findIndex(item)]=true;
+                    CanBuy[Index]=true;
                 }
                 else
                 {
-                    CanBuy[BuildingButtons.findIndex(item)]=false;
+                    CanBuy[Index]=false;
                 }
             }
             for (int i = 0; i < 4; i++)
