@@ -55,7 +55,7 @@ public class DayNightCycle : MonoBehaviour
             isDay=Time<=12;
             SkipDay.interactable=isDay;
             DayText.text="Day #"+(Day+1).ToString();
-            if(!isDay&&RS.RatsToSpawn<2&&RS.RatCollection.childCount<=1)
+            if(!isDay&&RS.RatsToSpawn<1&&RS.RatCollection.childCount<1)
             {
                 Debug.Log("test");
                 SkipNight.interactable=true;

@@ -44,10 +44,12 @@ public class RatSpawner : MonoBehaviour
             if(LastDay!=DNC.Day)
             {
                 LastDay=DNC.Day;
+                Difficulty=startingDifficulty+DNC.Day*DifficultyGrowthRate;
                 Debug.Log("New Day");
                 RatsSpawned=0;
-                RatsToSpawn=Mathf.Pow(StartingRats,Difficulty/10)-Mathf.Pow(StartingRats,startingDifficulty/10)+StartingRats;
-                Difficulty+=DifficultyGrowthRate;
+                Debug.Log(Mathf.Pow(StartingRats,Difficulty/10));
+                RatsToSpawn=Mathf.Pow(StartingRats,Difficulty/10);
+                
 
             }
             if(RatsToSpawn>0)

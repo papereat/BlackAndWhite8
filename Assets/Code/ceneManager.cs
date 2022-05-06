@@ -19,7 +19,6 @@ public class ceneManager : MonoBehaviour
     }
     public void LeaveGame()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();
     }
 }

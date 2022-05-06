@@ -20,6 +20,7 @@ public class TileAdder : MonoBehaviour
     public bool inBuildMode;
     public Color CanAffordColor;
     public Color CantAffordColor;
+    public BuidlingTile CheaseTile;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,9 +39,13 @@ public class TileAdder : MonoBehaviour
                 {
                     Vector3Int tilemapPos = TM.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)); 
                     var DeleteTile=TM.GetTile(tilemapPos);
-                    if(BuildableTiles[SelectedTile]!=DeleteTile)
+                    if(BuildableTiles[SelectedTile]!=DeleteTile&&DeleteTile!=CheaseTile)
                     {
-                        Player.Iron-=BuildableTiles[SelectedTile].Cost+2*AmountMade[SelectedTile];
+                        Debug.Log("Cake");
+                        if(DeleteTile==null)
+                        {
+                            Player.Iron-=BuildableTiles[SelectedTile].Cost+2*AmountMade[SelectedTile];
+                        }
                         PlaceTile();
                     }
                     
@@ -54,7 +59,7 @@ public class TileAdder : MonoBehaviour
             {
                 Vector3Int tilemapPos = TM.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)); 
                 var DeleteTile=TM.GetTile(tilemapPos);
-                if(!DeleteTile!=null)
+                if(DeleteTile!=null&&DeleteTile!=CheaseTile)
                 {
                     int Index=Array.IndexOf(BuildableTiles,DeleteTile);
                     Player.Iron+=BuildableTiles[Index].Cost+AmountMade[Index];

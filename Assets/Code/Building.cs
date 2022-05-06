@@ -56,7 +56,7 @@ public class Building : MonoBehaviour
     }
     protected virtual void Start()
     {
-        HealthBar=Instantiate(HealthBar,new Vector3(transform.position.x,transform.position.y-0.25f,transform.position.z),new Quaternion(0,0,0,0));
+        HealthBar=Instantiate(HealthBar,new Vector3(transform.position.x,transform.position.y-0.25f,transform.position.z),new Quaternion(0,0,0,0),this.transform);
         HealthBar.GetComponent<HealthBar>().IsBuidling=true;
         HealthBar.GetComponent<HealthBar>().Build=this.gameObject.GetComponent<Building>();
     }
