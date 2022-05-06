@@ -15,6 +15,8 @@ public class Building : MonoBehaviour
     WorldStatHolder WSH;
     public GameObject HealthBar;
     public int UpgradeCount;
+    public GameObject HealthBarIG;
+    public Tilemap TM;
 
 
     public void Damage(float Damage)
@@ -53,12 +55,13 @@ public class Building : MonoBehaviour
         StartCoroutine(CheckIfDamage());
         WSH=FindObjectOfType<WorldStatHolder>();
         AP=WSH.AP;
+        TM=WSH.TM;
     }
     protected virtual void Start()
     {
-        HealthBar=Instantiate(HealthBar,new Vector3(transform.position.x,transform.position.y-0.25f,transform.position.z),new Quaternion(0,0,0,0),this.transform);
-        HealthBar.GetComponent<HealthBar>().IsBuidling=true;
-        HealthBar.GetComponent<HealthBar>().Build=this.gameObject.GetComponent<Building>();
+        HealthBarIG=Instantiate(HealthBar,new Vector3(transform.position.x,transform.position.y-0.25f,transform.position.z),new Quaternion(0,0,0,0),this.transform);
+        HealthBarIG.GetComponent<HealthBar>().IsBuidling=true;
+        HealthBarIG.GetComponent<HealthBar>().Build=this.gameObject.GetComponent<Building>();
     }
     protected virtual void Death()
     {
@@ -70,5 +73,6 @@ public class Building : MonoBehaviour
         }
         AP.Scan();
         Destroy(this.gameObject);
+        TM.SetTile(TM.WorldToCell(transform.position),null);
     }
 }

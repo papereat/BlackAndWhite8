@@ -21,6 +21,10 @@ public class TileAdder : MonoBehaviour
     public Color CanAffordColor;
     public Color CantAffordColor;
     public BuidlingTile CheaseTile;
+    public DayNightCycle DNC;
+    public Sprite[] timeImages;
+    public Image SpeedImage;
+    public int SpeedSetting;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +34,7 @@ public class TileAdder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(inBuildMode)
+        if(inBuildMode&&DNC.isDay)
         {
            
             if(Input.GetKey(KeyCode.Mouse1))
@@ -39,13 +43,10 @@ public class TileAdder : MonoBehaviour
                 {
                     Vector3Int tilemapPos = TM.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)); 
                     var DeleteTile=TM.GetTile(tilemapPos);
-                    if(BuildableTiles[SelectedTile]!=DeleteTile&&DeleteTile!=CheaseTile)
+                    if(DeleteTile==null&&DeleteTile!=CheaseTile)
                     {
                         Debug.Log("Cake");
-                        if(DeleteTile==null)
-                        {
-                            Player.Iron-=BuildableTiles[SelectedTile].Cost+2*AmountMade[SelectedTile];
-                        }
+                        Player.Iron-=BuildableTiles[SelectedTile].Cost+2*AmountMade[SelectedTile];
                         PlaceTile();
                     }
                     
@@ -62,7 +63,13 @@ public class TileAdder : MonoBehaviour
                 if(DeleteTile!=null&&DeleteTile!=CheaseTile)
                 {
                     int Index=Array.IndexOf(BuildableTiles,DeleteTile);
-                    Player.Iron+=BuildableTiles[Index].Cost+AmountMade[Index];
+                    var SelectedObject=TM.GetInstantiatedObject(tilemapPos);
+                    if(SelectedObject!=null)
+                    {
+                        Debug.Log(7);
+                        var HealthBar=SelectedObject.GetComponent<Building>().HealthBarIG.GetComponent<HealthBar>();
+                        Player.Iron+=(int)((HealthBar.Health/HealthBar.MaxHealth)*BuildableTiles[Index].Cost);
+                    }
                     TM.SetTile(tilemapPos,null);
                 }
             }
@@ -121,5 +128,24 @@ public class TileAdder : MonoBehaviour
     {
         Vector3Int tilemapPos = TM.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)); 
         TM.SetTile(tilemapPos,BuildableTiles[SelectedTile]);
+    }
+    public void ChangeTimeScale()
+    {
+        SpeedSetting=(SpeedSetting+1)%3;
+        switch (SpeedSetting)
+        {
+            case 0:
+                Time.timeScale=0;
+                SpeedImage.sprite=timeImages[SpeedSetting];
+                break;
+            case 1:
+                Time.timeScale=1;
+                SpeedImage.sprite=timeImages[SpeedSetting];
+                break;
+            case 2:
+                Time.timeScale=2;
+                SpeedImage.sprite=timeImages[SpeedSetting];
+                break;
+        }
     }
 }
