@@ -138,7 +138,7 @@ public class RatCode : MonoBehaviour
 
     void Death()
     {
-        Vector2 Loot=new Vector2(Random.Range(0,4),0);
+        Vector2 Loot=new Vector2(Random.Range(0,8),0);
         switch (Loot.y)
         {
             case 0:

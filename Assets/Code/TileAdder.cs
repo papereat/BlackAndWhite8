@@ -25,6 +25,7 @@ public class TileAdder : MonoBehaviour
     public Sprite[] timeImages;
     public Image SpeedImage;
     public int SpeedSetting;
+    public bool DestroyMode;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,43 +35,49 @@ public class TileAdder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            DestroyMode=!DestroyMode;
+        }
         if(inBuildMode&&DNC.isDay)
         {
-           
             if(Input.GetKey(KeyCode.Mouse1))
             {
-                if(CanBuy[SelectedTile])
+                if(DestroyMode)
                 {
                     Vector3Int tilemapPos = TM.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)); 
                     var DeleteTile=TM.GetTile(tilemapPos);
-                    if(DeleteTile==null&&DeleteTile!=CheaseTile)
+                    if(DeleteTile!=null&&DeleteTile!=CheaseTile)
                     {
-                        Debug.Log("Cake");
-                        Player.Iron-=BuildableTiles[SelectedTile].Cost+2*AmountMade[SelectedTile];
-                        PlaceTile();
+                        int Index=Array.IndexOf(BuildableTiles,DeleteTile);
+                        var SelectedObject=TM.GetInstantiatedObject(tilemapPos);
+                        if(SelectedObject!=null)
+                        {
+                            Debug.Log(7);
+                            var HealthBar=SelectedObject.GetComponent<Building>().HealthBarIG.GetComponent<HealthBar>();
+                            Player.Iron+=(int)((HealthBar.Health/HealthBar.MaxHealth)*BuildableTiles[Index].Cost);
+                        }
+                        TM.SetTile(tilemapPos,null);
                     }
-                    
                 }
                 else
                 {
-                    NotEnough(true,Player.Iron-BuildableTiles[SelectedTile].Cost+2*AmountMade[SelectedTile]);
-                }
-            }
-            if(Input.GetKey(KeyCode.Mouse0))
-            {
-                Vector3Int tilemapPos = TM.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)); 
-                var DeleteTile=TM.GetTile(tilemapPos);
-                if(DeleteTile!=null&&DeleteTile!=CheaseTile)
-                {
-                    int Index=Array.IndexOf(BuildableTiles,DeleteTile);
-                    var SelectedObject=TM.GetInstantiatedObject(tilemapPos);
-                    if(SelectedObject!=null)
+                    if(CanBuy[SelectedTile])
                     {
-                        Debug.Log(7);
-                        var HealthBar=SelectedObject.GetComponent<Building>().HealthBarIG.GetComponent<HealthBar>();
-                        Player.Iron+=(int)((HealthBar.Health/HealthBar.MaxHealth)*BuildableTiles[Index].Cost);
+                        Vector3Int tilemapPos = TM.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)); 
+                        var DeleteTile=TM.GetTile(tilemapPos);
+                        if(DeleteTile==null&&DeleteTile!=CheaseTile)
+                        {
+                            Debug.Log("Cake");
+                            Player.Iron-=BuildableTiles[SelectedTile].Cost+2*AmountMade[SelectedTile];
+                            PlaceTile();
+                        }
+                        
                     }
-                    TM.SetTile(tilemapPos,null);
+                    else
+                    {
+                        NotEnough(true,Player.Iron-BuildableTiles[SelectedTile].Cost+2*AmountMade[SelectedTile]);
+                    }
                 }
             }
         }
@@ -103,7 +110,7 @@ public class TileAdder : MonoBehaviour
                     BuildingPriceText[i].color=CantAffordColor;
                 }
             }
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(.01f);
         }
         
     }
@@ -132,6 +139,25 @@ public class TileAdder : MonoBehaviour
     public void ChangeTimeScale()
     {
         SpeedSetting=(SpeedSetting+1)%3;
+        switch (SpeedSetting)
+        {
+            case 0:
+                Time.timeScale=0;
+                SpeedImage.sprite=timeImages[SpeedSetting];
+                break;
+            case 1:
+                Time.timeScale=1;
+                SpeedImage.sprite=timeImages[SpeedSetting];
+                break;
+            case 2:
+                Time.timeScale=2;
+                SpeedImage.sprite=timeImages[SpeedSetting];
+                break;
+        }
+    }
+    public void SetTimeScale(int Set)
+    {
+        SpeedSetting=Set%3;
         switch (SpeedSetting)
         {
             case 0:

@@ -12,6 +12,7 @@ public class Pmov : MonoBehaviour
     public int Iron;
     public TextMeshProUGUI IronCount;
     public int CatFood;
+    public Vector2 StartingMousePos;
 
     void Awake()
     {
@@ -20,7 +21,9 @@ public class Pmov : MonoBehaviour
     void Update()
     {
         IronCount.text="Iron: "+Iron.ToString();
+
         Vector2 movemnt=new Vector2(0,0);
+        /*
         if(Input.GetKey(KeyCode.W))
         {
             movemnt.y=speed;
@@ -37,8 +40,19 @@ public class Pmov : MonoBehaviour
         {
             movemnt.x=-speed;
         }
+        */
 
-        rb.velocity=movemnt;
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            StartingMousePos=Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+        if(Input.GetKey(KeyCode.Mouse0))
+        {
+            Vector2 CurrentMousePos=Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            movemnt=StartingMousePos-CurrentMousePos;
+        }
+
+        transform.position+=new Vector3(movemnt.x,movemnt.y,0);
 
     }
 }

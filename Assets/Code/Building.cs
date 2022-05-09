@@ -62,10 +62,11 @@ public class Building : MonoBehaviour
         HealthBarIG=Instantiate(HealthBar,new Vector3(transform.position.x,transform.position.y-0.25f,transform.position.z),new Quaternion(0,0,0,0),this.transform);
         HealthBarIG.GetComponent<HealthBar>().IsBuidling=true;
         HealthBarIG.GetComponent<HealthBar>().Build=this.gameObject.GetComponent<Building>();
+        AP.Scan();
     }
     protected virtual void Death()
     {
-        Destroy(HealthBar);
+        Destroy(HealthBarIG);
         Collider2D[] CollidersToOff=GetComponents<Collider2D>();
         foreach (var item in CollidersToOff)
         {

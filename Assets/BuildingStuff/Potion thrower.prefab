@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6052230847388389543}
   - component: {fileID: 6052230847388389544}
   - component: {fileID: 6052230847388389545}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Potion thrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,6 +119,8 @@ MonoBehaviour:
   AP: {fileID: 0}
   HealthBar: {fileID: 6531552719106984101, guid: d07dc409e2b410145b5f954f376bad63, type: 3}
   UpgradeCount: 0
+  HealthBarIG: {fileID: 0}
+  TM: {fileID: 0}
   CanAttack: 1
   Potion: {fileID: 2821232945708181236, guid: 8b02dba8fe1d29e49af9ca8842d096e9, type: 3}
   target: {fileID: 0}
