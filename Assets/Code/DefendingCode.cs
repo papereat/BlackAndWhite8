@@ -6,6 +6,7 @@
 public class DefendingCode : Building
 {
     public GameObject DeathScreen;
+    public Transform Canvas;
     protected override void Awake()
     {
         base.Awake();
@@ -14,6 +15,10 @@ public class DefendingCode : Building
     protected override void Death()
     {
         base.Death();
+        for (int i = 0; i < Canvas.childCount; i++)
+        {
+            Canvas.GetChild(i).gameObject.SetActive(false);
+        }
         DeathScreen.SetActive(true);
     }
 
