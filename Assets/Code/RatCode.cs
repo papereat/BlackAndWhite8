@@ -8,9 +8,9 @@ public class RatCode : MonoBehaviour
 {
     
     public AIDestinationSetter Destination;
+    public Transform Target;
     public Transform BuildingCollection;
     public float Health;
-    public AIPath AP;
     public bool CanMove;
     public float Damage;
     public List<bool> isStunned;
@@ -23,7 +23,10 @@ public class RatCode : MonoBehaviour
     public DayNightCycle DNC;
     public bool DamageAtNight;
     public int goodPriority;
-    
+    public Path path;
+    public Seeker seeker;
+    public Rigidbody2D rb;
+    public int CurrentWaypoint;
     //public Transform Rat;
 
 
@@ -36,9 +39,30 @@ public class RatCode : MonoBehaviour
         HealthBar=Instantiate(HealthBar,new Vector3(transform.position.x,transform.position.y-0.25f,transform.position.z),new Quaternion(0,0,0,0),transform);
         HealthBar.GetComponent<HealthBar>().IsBuidling=false;
         HealthBar.GetComponent<HealthBar>().Rat=this.gameObject.GetComponent<RatCode>();
+        SetT();
+        seeker.StartPath(rb.position,Target.position,OnPathComplete);
+    }
+    void OnPathComplete(Path p)
+    {
+        if(!p.error)
+        {
+            CurrentWaypoint=0;
+        }
     }
     void Update()
     {
+        Vector2 Direction=new Vector2(0,0);
+        path=seeker.GetCurrentPath();
+        if(path==null)
+        {
+            SetT();
+            seeker.StartPath(rb.position,Target.position,OnPathComplete);
+        }
+        Direction=((Vector2)path.vectorPath[1]-rb.position).normalized;
+        int x=(int)Direction.x;
+        int y=(int)Direction.y;
+        Debug.Log(Direction);
+        Debug.Log(x.ToString()+" "+y.ToString());
         if(isStunned.Count!=0)
         {
             CanMove=false;
@@ -47,8 +71,8 @@ public class RatCode : MonoBehaviour
         {
             CanMove=true;
         }
-        AP.canMove=CanMove;
-        if(Destination.target==null)
+
+        if(Target==null)
         {
             SetT();
         }
@@ -133,7 +157,7 @@ public class RatCode : MonoBehaviour
                 }
             }*/
         }
-        Destination.target=CLosestObject;
+        Target=CLosestObject;
     }
 
     void Death()

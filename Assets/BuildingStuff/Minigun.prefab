@@ -198,6 +198,8 @@ MonoBehaviour:
   AP: {fileID: 0}
   HealthBar: {fileID: 6531552719106984101, guid: d07dc409e2b410145b5f954f376bad63, type: 3}
   UpgradeCount: 0
+  HealthBarIG: {fileID: 0}
+  TM: {fileID: 0}
   CanAttack: 1
   Bullet: {fileID: 3323453961517532790, guid: 51a6b6fe14275604cbc31e9de4fecae0, type: 3}
   Angle: 0
@@ -223,7 +225,7 @@ MonoBehaviour:
   test: {x: 0, y: 0, z: 0}
   Damage:
     Values:
-    - 5
+    - 10
     - 1.3
     - 1.6
     - 2

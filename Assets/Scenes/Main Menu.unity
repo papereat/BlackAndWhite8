@@ -439,7 +439,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rat Renisance
+  m_text: Rat Renaissance
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b952a643904e3d47a3071d0ea399479, type: 2}
   m_sharedMaterial: {fileID: 2900796303717510411, guid: 9b952a643904e3d47a3071d0ea399479, type: 2}
@@ -466,7 +466,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56.3
+  m_fontSize: 107.15
   m_fontSizeBase: 53.49
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -600,7 +600,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.9
+  m_fontSize: 70.65
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -902,7 +902,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.2
+  m_fontSize: 85.25
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
