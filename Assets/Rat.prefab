@@ -198,7 +198,6 @@ MonoBehaviour:
   Target: {fileID: 0}
   BuildingCollection: {fileID: 0}
   Health: 100
-  AP: {fileID: 0}
   CanMove: 1
   Damage: 10
   isStunned: 
@@ -236,3 +235,4 @@ MonoBehaviour:
   seeker: {fileID: 6500106911284492860}
   rb: {fileID: 5504370491552703350}
   CurrentWaypoint: 0
+  Speed: 1

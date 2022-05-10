@@ -27,6 +27,9 @@ public class RatCode : MonoBehaviour
     public Seeker seeker;
     public Rigidbody2D rb;
     public int CurrentWaypoint;
+    public float Speed;
+    public float nextWaypointDistance=1f;
+    public Vector2 Direction;
     //public Transform Rat;
 
 
@@ -39,30 +42,41 @@ public class RatCode : MonoBehaviour
         HealthBar=Instantiate(HealthBar,new Vector3(transform.position.x,transform.position.y-0.25f,transform.position.z),new Quaternion(0,0,0,0),transform);
         HealthBar.GetComponent<HealthBar>().IsBuidling=false;
         HealthBar.GetComponent<HealthBar>().Rat=this.gameObject.GetComponent<RatCode>();
-        SetT();
-        seeker.StartPath(rb.position,Target.position,OnPathComplete);
+        StartCoroutine(RecalkPath());
+        
+    }
+    IEnumerator RecalkPath()
+    {
+        while (true)
+        {
+            SetT();
+            yield return new WaitForSeconds(2);
+        }
     }
     void OnPathComplete(Path p)
     {
         if(!p.error)
         {
+            path=p;
             CurrentWaypoint=0;
         }
     }
     void Update()
     {
-        Vector2 Direction=new Vector2(0,0);
-        path=seeker.GetCurrentPath();
-        if(path==null)
+        
+        if(Target==null)
         {
             SetT();
-            seeker.StartPath(rb.position,Target.position,OnPathComplete);
         }
-        Direction=((Vector2)path.vectorPath[1]-rb.position).normalized;
-        int x=(int)Direction.x;
-        int y=(int)Direction.y;
-        Debug.Log(Direction);
-        Debug.Log(x.ToString()+" "+y.ToString());
+        if(Health<=0)
+        {
+            Death();
+        }
+        Direction=((Vector2)path.vectorPath[CurrentWaypoint+1]-rb.position).normalized;
+        if(Vector2.Distance(rb.position,path.vectorPath[CurrentWaypoint+1])<=0.02)
+        {
+            CurrentWaypoint++;
+        }
         if(isStunned.Count!=0)
         {
             CanMove=false;
@@ -72,13 +86,10 @@ public class RatCode : MonoBehaviour
             CanMove=true;
         }
 
-        if(Target==null)
+        if(CanMove)
         {
-            SetT();
-        }
-        if(Health<=0)
-        {
-            Death();
+            Vector2 Rounded=new Vector2(MathAndOtherStuff.RoundFloat(Direction.x),MathAndOtherStuff.RoundFloat(Direction.y));
+            rb.velocity=Rounded*Speed;
         }
         //Rat.position=transform.position;
         
@@ -158,6 +169,7 @@ public class RatCode : MonoBehaviour
             }*/
         }
         Target=CLosestObject;
+        seeker.StartPath(rb.position,Target.position,OnPathComplete);
     }
 
     void Death()

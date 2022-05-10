@@ -34,6 +34,27 @@ public class MathAndOtherStuff : MonoBehaviour
         }
         Debug.Log(debugLog);
     }
-    
+    public static int RoundFloat(float round)
+    {
+        bool Negitive= round<0;
+        int WholeNum=(int)round;
+        float Decimal=round-WholeNum;
+        if(Negitive)
+        {
+            Decimal=Decimal*-1;
+        }
+        if(Decimal>=.5)
+        {
+            if(Negitive)
+            {
+                WholeNum-=1;
+            }
+            else
+            {
+            WholeNum+=1;
+            }
+        }
+        return WholeNum;
+    }
 
 }

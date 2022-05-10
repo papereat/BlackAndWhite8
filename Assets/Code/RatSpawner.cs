@@ -162,6 +162,6 @@ public class RatSpawner : MonoBehaviour
         RatInitiate.GetComponent<RatCode>().Player=Player;
         RatInitiate.GetComponent<RatCode>().BuildingCollection=BuildingCollider;
         RatInitiate.GetComponent<RatCode>().DNC=DNC;
-        RatInitiate.GetComponent<RatCode>().goodPriority=Random.Range(0,2);
+        RatInitiate.GetComponent<RatCode>().goodPriority=Random.Range(0,1);
     }
 }
